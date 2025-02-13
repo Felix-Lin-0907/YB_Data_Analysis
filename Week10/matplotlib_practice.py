@@ -18,11 +18,12 @@ def basicPractice():
     save_path = os.path.join(save_dir, "basicPractice.png")
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
     plt.show()
+    plt.close()
 
 def barChart():
     categories = ["A", "B", "C", "D"]
     values = [3, 7, 1, 8]
-    
+
     plt.bar(categories, values, color="skyblue")
     plt.xlabel("Categories")
     plt.ylabel("Values")
@@ -31,6 +32,7 @@ def barChart():
     save_path = os.path.join(save_dir, "barChart.png")
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
     plt.show()
+    plt.close()
 
 def pieChart():
     categories = ["A", "B", "C", "D"]
@@ -43,8 +45,28 @@ def pieChart():
     save_path = os.path.join(save_dir, "pieChart.png")
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
     plt.show()
+    plt.close()
+
+def scatterPlot():
+    plt.figure()  
+    x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    y = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+    sizes = [20, 50, 80, 120, 150, 200, 250, 300, 350, 400] 
+    colors = range(len(x))  
+
+    plt.scatter(x, y, s=sizes, c=colors, cmap="viridis", alpha=0.7, edgecolors="k")
+    plt.xlabel("X-Axis")
+    plt.ylabel("Y-Axis")
+    plt.title("Scatter Plot Example")
+    plt.colorbar(label="Point Index") 
+
+    save_path = os.path.join(save_dir, "scatterPlot.png")
+    plt.savefig(save_path, dpi=300, bbox_inches='tight')
+    plt.show()
+    plt.close()
 
 if __name__ == "__main__":
     # basicPractice()
     # barChart()
-    pieChart()
+    # pieChart()
+    scatterPlot()
