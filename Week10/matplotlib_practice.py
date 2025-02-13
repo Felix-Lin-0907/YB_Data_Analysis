@@ -22,6 +22,7 @@ def basicPractice():
 def barChart():
     categories = ["A", "B", "C", "D"]
     values = [3, 7, 1, 8]
+    
     plt.bar(categories, values, color="skyblue")
     plt.xlabel("Categories")
     plt.ylabel("Values")
@@ -31,6 +32,19 @@ def barChart():
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
     plt.show()
 
+def pieChart():
+    categories = ["A", "B", "C", "D"]
+    values = [3, 7, 1, 8]
+
+    plt.figure(figsize=(6,6)) 
+    plt.pie(values, labels=categories, autopct='%1.1f%%', colors=["skyblue", "lightcoral", "lightgreen", "gold"])
+    plt.title("Pie Chart Example")
+
+    save_path = os.path.join(save_dir, "pieChart.png")
+    plt.savefig(save_path, dpi=300, bbox_inches='tight')
+    plt.show()
+
 if __name__ == "__main__":
     # basicPractice()
-    barChart()
+    # barChart()
+    pieChart()
