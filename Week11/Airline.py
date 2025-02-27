@@ -65,6 +65,7 @@ y_pred_xgb = xgb_model.predict(X_test)
 # LSTM Model
 lstm_model = Sequential([
     LSTM(50, activation='relu', return_sequences=True, input_shape=(1,1)),
+    LSTM(50, activation='relu', return_sequences=True),
     LSTM(50, activation='relu'),
     Dense(1)
 ])
@@ -77,6 +78,7 @@ y_pred_lstm = scaler.inverse_transform(y_pred_lstm)
 ann_model = Sequential([
     Dense(64, activation='relu', input_shape=(1,)),
     Dense(32, activation='relu'),
+    Dense(16, activation='relu'),
     Dense(1)
 ])
 ann_model.compile(optimizer='adam', loss='mse')
@@ -101,6 +103,7 @@ def evaluate_model(y_true, y_pred, model_name):
 evaluate_model(y_test, y_pred_lr, "Linear Regression")
 evaluate_model(y_test, y_pred_xgb, "XGBoost")
 # evaluate_model(y_test, y_pred_lstm.flatten(), "LSTM") # activity : Check the code for LSTM
+evaluate_model(y_test[:-1], y_pred_lstm.flatten(), "LSTM")
 evaluate_model(y_test, y_pred_ann.flatten(), "ANN")
 evaluate_model(y_test, y_pred_arima, "ARIMA")
 
@@ -110,6 +113,7 @@ plt.plot(y_test.index, y_test, label="Actual")
 plt.plot(y_test.index, y_pred_lr, label="Linear Regression", linestyle="dashed")
 plt.plot(y_test.index, y_pred_xgb, label="XGBoost", linestyle="dashed")
 # plt.plot(y_test.index, y_pred_lstm.flatten(), label="LSTM", linestyle="dashed")
+plt.plot(y_test.index[:-1], y_pred_lstm.flatten(), label="LSTM", linestyle="dashed")
 plt.plot(y_test.index, y_pred_ann.flatten(), label="ANN", linestyle="dashed")
 plt.plot(y_test.index, y_pred_arima, label="ARIMA", linestyle="dashed")
 plt.legend()
